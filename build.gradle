@@ -26,6 +26,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	// H2データベースの依存関係を追加
 	implementation 'com.h2database:h2' 
+	// Spring Boot Validation Starterを追加
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
 }
 
 tasks.named('test') {

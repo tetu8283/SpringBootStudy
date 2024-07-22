@@ -4,10 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1 th:text="${title}"></h1>
+    <h1 class="display-4 mb-4" th:text="${title}"></h1>
     <p th:text="${msg}"></p>
-    <pre th:text="${data}"></pre>
+    
+    <form method="post" action="/" th:object="${formModel}">
+        <div class="mb-3">
+            <label for="name">Name</label> 
+            <input type="text" class="form-controll" name="name" th:value="*{name}" />
+        </div>
+        <div class="mb-3"> 
+            <label for="name" class="form-label">Mail</label> 
+            <input type="text" class="form-controll" name="mail" th:value="*{mail}" />
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Age</label>
+            <input type="number" class="form-controll" name="age" th:value="*{age}" />
+        </div>
+        <div class="mb-3">
+            <label for="memo" class="form-label">Memo</label> 
+            <textarea class="form-controll" name="memo" th:text="*{memo}"></textarea>
+        </div>
+        <!-- Createで登録ボタンを作成 -->
+        <input type="submit" class="btn btn-primary" value="Create"/>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Mail</th>
+                <th>Age</th>
+                <th>Memo</th>
+            </tr>
+            <!-- テーブルで各カラムの値を表示 -->
+        </thead>
+        <tbody>
+            <!-- eachで回す -->
+            <tr th:each="item: ${data}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.mail}"></td>
+                <td th:text="${item.age}"></td>
+                <td th:text="${item.memo}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
+
+
