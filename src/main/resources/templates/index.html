@@ -11,23 +11,27 @@
     <p th:text="${msg}"></p>
     
     <form method="post" action="/" th:object="${formModel}">
+        <!-- バリデーションエラー表示 -->
+        <style>.err { color:red } </style>
         <div class="mb-3">
-            <label for="name">Name</label> 
-            <input type="text" class="form-controll" name="name" th:value="*{name}" />
-        </div>
-        <div class="mb-3"> 
-            <label for="name" class="form-label">Mail</label> 
-            <input type="text" class="form-controll" name="mail" th:value="*{mail}" />
+            <label for="name" class="form-label">Name</label> 
+            <input type="text" class="form-control" id="name" name="name" th:value="*{name}" th:errorclass="err" />
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="err"></div>
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Age</label>
-            <input type="number" class="form-controll" name="age" th:value="*{age}" />
+            <label for="mail" class="form-label">Mail</label> 
+            <input type="text" class="form-control" id="mail" name="mail" th:value="*{mail}" th:errorclass="err" />
+            <div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" class="err"></div>
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" name="age" th:value="*{age}" th:errorclass="err" />
+            <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="err"></div>
         </div>
         <div class="mb-3">
             <label for="memo" class="form-label">Memo</label> 
-            <textarea class="form-controll" name="memo" th:text="*{memo}"></textarea>
+            <textarea class="form-control" id="memo" name="memo" th:text="*{memo}"></textarea>
         </div>
-        <!-- Createで登録ボタンを作成 -->
         <input type="submit" class="btn btn-primary" value="Create"/>
     </form>
 
@@ -38,22 +42,23 @@
                 <th>Name</th>
                 <th>Mail</th>
                 <th>Age</th>
-                <th>Memo</th>
+                <th>messages</th>
             </tr>
-            <!-- テーブルで各カラムの値を表示 -->
         </thead>
         <tbody>
-            <!-- eachで回す -->
-            <tr th:each="item: ${data}">
+            <tr th:each="item : ${data}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.mail}"></td>
                 <td th:text="${item.age}"></td>
-                <td th:text="${item.memo}"></td>
+                <td th:text="${item.messages}"></td>
+                <!-- <td>
+                    <ul th:each="msg : ${item.messages}">
+                        <li th:text="${msg.content}"></li>
+                    </ul>
+                </td> -->
             </tr>
         </tbody>
     </table>
 </body>
 </html>
-
-
